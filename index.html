@@ -1,0 +1,1123 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solaris Traduções — Transformando Palavras, Criando Conexões</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --yellow: #F5E642;
+      --yellow-pastel: #FDF3A0;
+      --yellow-light: #FEFADC;
+      --yellow-mid: #F9E84E;
+      --black: #111010;
+      --ink: #1C1B18;
+      --white: #FEFEFE;
+      --cream: #FDFAF0;
+      --gray-text: #5A5848;
+      --gray-light: #E8E4D4;
+      --border: rgba(200,175,20,0.22);
+      --border-dark: rgba(100,80,0,0.18);
+    }
+
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+
+    /* CURSOR */
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--black); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transition: transform 0.15s ease;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--black); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transition: transform 0.35s ease, width 0.25s, height 0.25s;
+      transform: translate(-50%, -50%);
+      opacity: 0.4;
+    }
+
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.3rem 4rem;
+      background: rgba(254,254,254,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 24px rgba(200,175,20,0.07);
+    }
+    .logo-wrap {
+      display: flex; align-items: center; gap: 0.85rem;
+      text-decoration: none;
+    }
+    .logo-svg { width: 52px; height: 52px; flex-shrink: 0; }
+    .logo-text { display: flex; flex-direction: column; gap: 1px; }
+    .logo-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 1.25rem; font-weight: 600; letter-spacing: 0.28em;
+      color: var(--black); text-transform: uppercase; line-height: 1;
+    }
+    .logo-sub {
+      font-size: 0.56rem; letter-spacing: 0.5em; color: var(--gray-text);
+      text-transform: uppercase; font-weight: 300;
+    }
+    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: block; padding: 0.5rem 1.3rem;
+      color: var(--gray-text); text-decoration: none;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 400; transition: color 0.3s; position: relative;
+    }
+    .nav-links > li > a::after {
+      content: ''; position: absolute; bottom: -2px; left: 1.3rem; right: 1.3rem;
+      height: 2px; background: var(--black);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.35s;
+    }
+    .nav-links > li > a:hover,
+    .nav-links > li > a.active { color: var(--black); }
+    .nav-links > li > a:hover::after,
+    .nav-links > li > a.active::after { transform: scaleX(1); }
+
+
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      min-width: 220px; padding: 0.5rem 0;
+      box-shadow: 0 8px 32px rgba(180,160,0,0.1);
+    }
+    .nav-links > li:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block; padding: 0.65rem 1.4rem;
+      color: var(--gray-text); text-decoration: none;
+      font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase;
+      transition: color 0.25s, background 0.25s;
+    }
+    .dropdown a:hover { color: var(--black); background: var(--yellow-light); }
+
+
+    .btn-orcamento {
+      background: var(--yellow); color: var(--black);
+      border: none; padding: 0.65rem 1.6rem;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 600; cursor: none;
+      transition: background 0.3s, transform 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-orcamento:hover { background: var(--black); color: var(--yellow); transform: translateY(-1px); }
+
+
+    section { min-height: 100vh; padding: 0; }
+
+
+    /* HERO */
+    #inicio {
+      position: relative; display: flex; align-items: center;
+      justify-content: flex-start; padding: 0 4rem;
+      overflow: hidden; background: var(--white);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 65% 75% at 85% 45%, rgba(245,230,66,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 15% 85%, rgba(245,230,66,0.1) 0%, transparent 60%);
+    }
+    /* Globe wireframe decoration inspired by logo */
+    .hero-globe-deco {
+      position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+      width: 520px; height: 520px; opacity: 0.08; pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,175,20,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,175,20,0.12) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 20%, transparent 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2; max-width: 700px;
+      padding-top: 9rem;
+      animation: fadeUp 1.2s ease both;
+    }
+    .hero-label {
+      font-size: 0.62rem; letter-spacing: 0.5em;
+      color: var(--gray-text); text-transform: uppercase;
+      margin-bottom: 1.5rem; font-weight: 400;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-label::before { content: ''; width: 36px; height: 1px; background: var(--black); display: inline-block; }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
+      margin-bottom: 1.8rem; color: var(--black);
+    }
+    .hero-title em { font-style: italic; color: #8B6F00; }
+    .hero-desc {
+      font-size: 0.84rem; letter-spacing: 0.06em; line-height: 2;
+      color: var(--gray-text); max-width: 480px;
+      margin-bottom: 3rem;
+    }
+    .hero-cta { display: flex; gap: 1.2rem; align-items: center; }
+    .btn-outline {
+      border: 1.5px solid var(--black); color: var(--black);
+      padding: 0.65rem 1.6rem; text-decoration: none;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 600; transition: background 0.3s, color 0.3s;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+    .hero-side {
+      position: absolute; right: 4rem; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .hero-side-text {
+      writing-mode: vertical-rl; font-size: 0.58rem;
+      letter-spacing: 0.4em; color: rgba(90,88,72,0.35);
+      text-transform: uppercase;
+    }
+    .hero-star { color: var(--black); font-size: 1.2rem; opacity: 0.15; }
+
+
+    /* MVV */
+    .mvv-section {
+      background: var(--yellow-light);
+      padding: 8rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.6rem; letter-spacing: 0.5em;
+      color: var(--gray-text); text-transform: uppercase;
+      margin-bottom: 1rem; font-weight: 400;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 28px; height: 1px; background: var(--black);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300; margin-bottom: 3.5rem;
+      line-height: 1.1; color: var(--black);
+    }
+    .mvv-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .mvv-card {
+      padding: 2.8rem 2.2rem;
+      border: 1px solid rgba(180,155,10,0.2);
+      background: var(--white);
+      position: relative; overflow: hidden;
+      transition: border-color 0.4s, box-shadow 0.4s;
+      border-radius: 2px;
+    }
+    .mvv-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--yellow), var(--yellow-pastel));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.5s;
+    }
+    .mvv-card:hover { border-color: var(--yellow); box-shadow: 0 6px 32px rgba(200,175,20,0.15); }
+    .mvv-card:hover::before { transform: scaleX(1); }
+    .mvv-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.5rem; font-weight: 300; line-height: 1;
+      color: rgba(200,175,20,0.12); margin-bottom: 1.5rem;
+      position: absolute; top: 1.2rem; right: 1.8rem;
+    }
+    .mvv-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 400; margin-bottom: 1rem;
+      color: var(--black);
+    }
+    .mvv-card p {
+      font-size: 0.8rem; line-height: 2;
+      color: var(--gray-text);
+    }
+    .mvv-card strong { color: var(--black); font-weight: 600; }
+
+
+    /* SOBRE */
+    #sobre {
+      padding: 8rem 4rem;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+    .sobre-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: start;
+    }
+    .sobre-text p {
+      font-size: 0.83rem; line-height: 2.1;
+      color: var(--gray-text); margin-bottom: 1.5rem;
+    }
+    .sobre-text .highlight {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; font-style: italic;
+      color: #7A6000; line-height: 1.5;
+      border-left: 2.5px solid var(--yellow); padding-left: 1.5rem;
+      margin: 2.5rem 0;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px;
+    }
+    .stat-box {
+      padding: 2.2rem; border: 1px solid var(--border);
+      text-align: center; transition: border-color 0.3s, background 0.3s;
+      background: var(--cream);
+    }
+    .stat-box:hover { border-color: var(--yellow); background: var(--yellow-light); }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 300; color: var(--black);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.6rem; letter-spacing: 0.25em;
+      color: var(--gray-text); text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+
+    /* EQUIPE */
+    .team-section {
+      padding: 8rem 4rem;
+      background: var(--yellow-pastel);
+      border-top: 1px solid var(--border);
+    }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      gap: 1rem; margin-top: 3rem;
+    }
+    .team-card {
+      border: 1px solid rgba(180,155,10,0.2);
+      background: var(--white);
+      overflow: hidden; position: relative;
+      transition: border-color 0.4s, box-shadow 0.4s;
+      border-radius: 2px;
+    }
+    .team-card:hover { border-color: var(--black); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+    .team-avatar {
+      width: 100%; aspect-ratio: 1;
+      background: var(--yellow-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300;
+      color: var(--black); position: relative; overflow: hidden;
+    }
+    /* Star spark accent inspired by logo */
+    .team-avatar::before {
+      content: '✦'; position: absolute; top: 6px; right: 8px;
+      font-size: 0.7rem; color: var(--black); opacity: 0.25;
+    }
+    .team-info { padding: 1.2rem 1rem; }
+    .team-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 400;
+      color: var(--black); margin-bottom: 0.3rem;
+    }
+    .team-role {
+      font-size: 0.56rem; letter-spacing: 0.22em;
+      color: var(--gray-text); text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .team-langs {
+      font-size: 0.66rem; color: rgba(90,88,72,0.65); line-height: 1.7;
+    }
+    .btn-portfolio {
+      display: inline-block; margin-top: 1rem;
+      padding: 0.45rem 1rem;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 600; text-decoration: none;
+      border: 1.5px solid var(--black); color: var(--black);
+      background: transparent;
+      transition: background 0.25s, color 0.25s;
+      cursor: none;
+    }
+    .btn-portfolio:hover { background: var(--yellow); border-color: var(--yellow); }
+
+
+    /* SERVIÇOS */
+    #servicos {
+      padding: 8rem 4rem;
+      border-top: 1px solid var(--border);
+      background: var(--cream);
+    }
+    .services-tabs {
+      display: flex; gap: 0; margin-top: 3rem; margin-bottom: 0;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .service-tab {
+      padding: 1rem 1.8rem; background: none; border: none;
+      color: var(--gray-text); font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+      cursor: none; transition: color 0.3s; position: relative;
+      font-weight: 400; border-right: 1px solid var(--border);
+    }
+    .service-tab:last-child { border-right: none; }
+    .service-tab::after {
+      content: ''; position: absolute; bottom: -1.5px; left: 0; right: 0;
+      height: 2px; background: var(--black);
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    .service-tab.active, .service-tab:hover { color: var(--black); }
+    .service-tab.active::after { transform: scaleX(1); }
+
+
+    .service-panels { margin-top: 0; }
+    .service-panel {
+      display: none; padding: 4rem 0;
+      animation: fadeUp 0.5s ease both;
+    }
+    .service-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .service-panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 300; margin-bottom: 1.5rem;
+      line-height: 1.1; color: var(--black);
+    }
+    .service-panel-title em { font-style: italic; color: #7A6000; }
+    .service-panel p {
+      font-size: 0.8rem; line-height: 2.1;
+      color: var(--gray-text); margin-bottom: 1.2rem;
+    }
+    .service-features { list-style: none; margin-top: 2rem; }
+    .service-features li {
+      font-size: 0.76rem; letter-spacing: 0.04em;
+      color: var(--gray-text); padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1rem;
+      transition: color 0.3s;
+    }
+    .service-features li:hover { color: var(--black); }
+    .service-features li::before {
+      content: ''; display: block;
+      width: 18px; height: 1.5px; background: var(--black); flex-shrink: 0;
+    }
+    .service-visual {
+      border: 1px solid rgba(180,155,10,0.2);
+      padding: 3rem; position: relative;
+      background: var(--yellow-light);
+    }
+    .service-icon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5.5rem; font-weight: 300; color: rgba(0,0,0,0.08);
+      line-height: 1; margin-bottom: 2rem;
+    }
+    .service-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-style: italic;
+      color: var(--gray-text); line-height: 1.7;
+    }
+
+
+    /* CONTATO */
+    #contato {
+      padding: 8rem 4rem;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .contato-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: start;
+    }
+    .contato-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 400;
+      color: var(--black); margin-bottom: 0.7rem;
+      margin-top: 2.5rem;
+    }
+    .contato-info h3:first-child { margin-top: 0; }
+    .contato-info p { font-size: 0.8rem; line-height: 2; color: var(--gray-text); }
+    .contato-divider { width: 36px; height: 1.5px; background: var(--yellow); margin: 1.8rem 0; }
+    .orcamento-form {
+      border: 1px solid rgba(180,155,10,0.2); padding: 3rem;
+      background: var(--yellow-light);
+    }
+    .orcamento-form h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem; font-weight: 300; margin-bottom: 2rem; color: var(--black);
+    }
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label {
+      display: block; font-size: 0.6rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gray-text); margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; background: var(--white);
+      border: 1px solid rgba(180,155,10,0.25); color: var(--black);
+      padding: 0.75rem 1rem; font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.76rem; letter-spacing: 0.04em;
+      outline: none; transition: border-color 0.3s; cursor: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--black); }
+    .form-group textarea { height: 90px; resize: none; }
+    .form-group select { appearance: none; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+
+    /* FOOTER */
+    footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--black);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; letter-spacing: 0.2em;
+      color: rgba(254,254,254,0.4); text-transform: uppercase;
+    }
+    .footer-copy {
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      color: rgba(254,254,254,0.2); text-transform: uppercase;
+    }
+    .footer-gold {
+      font-size: 0.6rem; letter-spacing: 0.18em;
+      color: var(--yellow); text-transform: uppercase;
+    }
+
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #inicio, .mvv-section, #sobre, .team-section, #servicos, #contato { padding: 6rem 1.5rem; }
+      .mvv-grid { grid-template-columns: 1fr; }
+      .sobre-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-panel.active { grid-template-columns: 1fr; gap: 2rem; }
+      .contato-layout { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#inicio" class="logo-wrap">
+    <!-- Logo SVG inline inspired by the real Solaris logo -->
+    <svg class="logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Yellow circle background -->
+      <circle cx="60" cy="62" r="52" fill="#F5E642"/>
+      <!-- Globe wireframe -->
+      <ellipse cx="60" cy="66" rx="32" ry="32" stroke="#111010" stroke-width="1.4" fill="none"/>
+      <ellipse cx="60" cy="66" rx="16" ry="32" stroke="#111010" stroke-width="1" fill="none"/>
+      <ellipse cx="60" cy="66" rx="32" ry="13" stroke="#111010" stroke-width="1" fill="none"/>
+      <line x1="28" y1="66" x2="92" y2="66" stroke="#111010" stroke-width="1"/>
+      <line x1="60" y1="34" x2="60" y2="98" stroke="#111010" stroke-width="1"/>
+      <!-- Orbit ring -->
+      <ellipse cx="65" cy="62" rx="38" ry="10" stroke="#111010" stroke-width="1.6" fill="none" transform="rotate(-22 65 62)"/>
+      <!-- Stars -->
+      <path d="M90 28 L92 33 L97 35 L92 37 L90 42 L88 37 L83 35 L88 33 Z" fill="#111010"/>
+      <path d="M98 40 L99 43 L102 44 L99 45 L98 48 L97 45 L94 44 L97 43 Z" fill="#111010"/>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-title">Solaris</span>
+      <span class="logo-sub">Traduções</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio" class="active" data-section="inicio">Início</a></li>
+    <li>
+      <a href="#sobre" data-section="sobre">Sobre Nós</a>
+      <div class="dropdown">
+        <a href="#equipe">Equipe</a>
+      </div>
+    </li>
+    <li>
+      <a href="#servicos" data-section="servicos">Serviços</a>
+      <div class="dropdown">
+        <a href="#servicos" onclick="switchTab('tecnicas')">Traduções Técnicas</a>
+        <a href="#servicos" onclick="switchTab('literarias')">Traduções Literárias</a>
+        <a href="#servicos" onclick="switchTab('revisao')">Revisão de Texto</a>
+        <a href="#servicos" onclick="switchTab('versao')">Versão e Legendagem</a>
+      </div>
+    </li>
+    <li><a href="#contato" data-section="contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="btn-orcamento">Solicite Orçamento</a>
+</nav>
+
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <!-- Large decorative globe inspired by logo -->
+  <svg class="hero-globe-deco" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="260" cy="260" rx="220" ry="220" stroke="#111010" stroke-width="1.5" fill="none"/>
+    <ellipse cx="260" cy="260" rx="110" ry="220" stroke="#111010" stroke-width="1" fill="none"/>
+    <ellipse cx="260" cy="260" rx="220" ry="90" stroke="#111010" stroke-width="1" fill="none"/>
+    <ellipse cx="260" cy="260" rx="220" ry="165" stroke="#111010" stroke-width="0.8" fill="none"/>
+    <ellipse cx="260" cy="260" rx="190" ry="70" stroke="#111010" stroke-width="0.8" fill="none"/>
+    <line x1="40" y1="260" x2="480" y2="260" stroke="#111010" stroke-width="0.8"/>
+    <line x1="260" y1="40" x2="260" y2="480" stroke="#111010" stroke-width="0.8"/>
+    <ellipse cx="285" cy="240" rx="265" ry="68" stroke="#111010" stroke-width="2" fill="none" transform="rotate(-20 285 240)"/>
+    <path d="M380 80 L386 96 L402 102 L386 108 L380 124 L374 108 L358 102 L374 96 Z" fill="#111010"/>
+    <path d="M410 112 L413 120 L421 123 L413 126 L410 134 L407 126 L399 123 L407 120 Z" fill="#111010"/>
+  </svg>
+
+
+  <div class="hero-content">
+    <div class="hero-label">Agência de Tradução de Excelência</div>
+    <h1 class="hero-title">
+      Transformando<br/>
+      palavras, criando<br/>
+      <em>conexões</em>
+    </h1>
+    <p class="hero-desc">
+      Tradução não é apenas substituição de palavras — é a arte de preservar a essência, a emoção e o ritmo de cada texto através de línguas e culturas.
+    </p>
+    <div class="hero-cta">
+      <a href="#contato" class="btn-orcamento">Solicite Orçamento</a>
+      <a href="#sobre" class="btn-outline">Nossa equipe</a>
+    </div>
+  </div>
+  <div class="hero-side">
+    <span class="hero-star">✦</span>
+    <span class="hero-side-text">Est. 2010 — São Paulo — Brasil</span>
+    <span class="hero-star">✦</span>
+  </div>
+</section>
+
+
+<!-- MVV -->
+<div class="mvv-section fade-in">
+  <div class="section-label">Fundamentos</div>
+  <h2 class="section-title">Missão, Visão<br/>& Valores</h2>
+  <div class="mvv-grid">
+    <div class="mvv-card">
+      <div class="mvv-number">01</div>
+      <h3>Missão</h3>
+      <p>Transformar palavras em pontes entre culturas e pessoas, através de traduções precisas, elegantes e culturalmente ressonantes. Acreditamos que cada palavra carrega um universo — nossa missão é preservá-lo.</p>
+    </div>
+    <div class="mvv-card">
+      <div class="mvv-number">02</div>
+      <h3>Visão</h3>
+      <p>Ser a agência de tradução mais respeitada do Brasil, reconhecida pela excelência artesanal, pela confiança de nossos clientes e pelo impacto transformador que nossas traduções causam na comunicação global.</p>
+    </div>
+    <div class="mvv-card">
+      <div class="mvv-number">03</div>
+      <h3>Valores</h3>
+      <p>
+        <strong>Precisão</strong> — fidelidade ao texto original.<br/><br/>
+        <strong>Elegância</strong> — beleza na expressão traduzida.<br/><br/>
+        <strong>Integridade</strong> — compromisso com prazos e ética.<br/><br/>
+        <strong>Atemporalidade</strong> — traduções que perduram.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-layout fade-in">
+    <div class="sobre-text">
+      <div class="section-label">Sobre Nós</div>
+      <h2 class="section-title">Mais de uma<br/>década de palavra</h2>
+      <p>A Solaris Traduções nasceu da crença de que traduzir é, antes de tudo, um ato de amor pelas línguas. Fundada em São Paulo, construímos ao longo dos anos uma reputação sólida na intersecção entre precisão técnica e sensibilidade literária.</p>
+      <div class="highlight">"Traduzir é ler com profundidade e escrever com alma."</div>
+      <p>Nossa equipe de especialistas reúne décadas de experiência em áreas diversas — do direito à literatura, da medicina às artes. Cada projeto é tratado com atenção individualizada, respeitando as particularidades do texto e as necessidades de cada cliente.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-number">2+</div>
+        <div class="stat-label">Anos de atuação</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Idiomas disponíveis</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">3k+</div>
+        <div class="stat-label">Projetos entregues</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Satisfação de clientes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- EQUIPE -->
+<div class="team-section fade-in" id="equipe">
+  <div class="section-label">Nossa Equipe</div>
+  <h2 class="section-title">Os tradutores<br/>por trás das palavras</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">ST</div>
+      <div class="team-info">
+        <div class="team-name">Sophia Trindade</div>
+        <div class="team-role">Tradutora & Revisora</div>
+        <div class="team-langs">Inglês · Espanhol<br/>Esp.: Literária</div>
+        <a href="#" class="btn-portfolio">Ver portfólio</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">GB</div>
+      <div class="team-info">
+        <div class="team-name">Gabriel Brandão</div>
+        <div class="team-role">Tradutor & Revisor</div>
+        <div class="team-langs">Inglês · Italiano<br/>Esp.: Direito & Finanças</div>
+        <a href="#" class="btn-portfolio">Ver portfólio</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">AG</div>
+      <div class="team-info">
+        <div class="team-name">Amanda Gabriela</div>
+        <div class="team-role">Tradutora & Revisora</div>
+        <div class="team-langs">Inglês · Francês<br/>Esp.: Cultura & Artes</div>
+        <a href="#" class="btn-portfolio">Ver portfólio</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">LS</div>
+      <div class="team-info">
+        <div class="team-name">Leticia Storel</div>
+        <div class="team-role">Tradutora & Revisora</div>
+        <div class="team-langs">Inglês · Japonês<br/>Esp.: Audiovisual & Mídia</div>
+        <a href="#" class="btn-portfolio">Ver portfólio</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">NM</div>
+      <div class="team-info">
+        <div class="team-name">Natasha Mattos</div>
+        <div class="team-role">Tradutora</div>
+        <div class="team-langs">Inglês · Russo<br/>Esp.: Medicina & Ciências</div>
+        <a href="#" class="btn-portfolio">Ver portfólio</a>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">AS</div>
+      <div class="team-info">
+        <div class="team-name">Ana Sara</div>
+        <div class="team-role">Tradutora</div>
+        <div class="team-langs">Inglês · Alemão<br/>Esp.: Direito & Contratos</div>
+        <a href="#" class="btn-portfolio">Ver portfólio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="section-label">O que fazemos</div>
+  <h2 class="section-title">Nossos<br/>Serviços</h2>
+  <div class="services-tabs">
+    <button class="service-tab active" onclick="switchTab('tecnicas')">Traduções Técnicas</button>
+    <button class="service-tab" onclick="switchTab('literarias')">Traduções Literárias</button>
+    <button class="service-tab" onclick="switchTab('revisao')">Revisão de Texto</button>
+    <button class="service-tab" onclick="switchTab('versao')">Versão e Legendagem</button>
+  </div>
+  <div class="service-panels">
+    <div class="service-panel active" id="panel-tecnicas">
+      <div>
+        <h3 class="service-panel-title">Traduções<br/><em>Técnicas</em></h3>
+        <p>Precisão terminológica e domínio especializado em documentos que exigem rigor absoluto. Nossa equipe combina fluência linguística com conhecimento profundo em áreas específicas.</p>
+        <p>Cada documento técnico é tratado com rigor científico e atenção aos padrões de cada setor.</p>
+        <ul class="service-features">
+          <li>Documentos jurídicos e contratuais</li>
+          <li>Textos médicos e farmacêuticos</li>
+          <li>Manuais de engenharia e tecnologia</li>
+          <li>Relatórios financeiros e corporativos</li>
+          <li>Patentes e documentos científicos</li>
+          <li>Normas e regulamentações técnicas</li>
+        </ul>
+      </div>
+      <div class="service-visual">
+        <div class="service-icon">T</div>
+        <p class="service-quote">"A precisão técnica nunca deve sacrificar a clareza da comunicação."</p>
+      </div>
+    </div>
+    <div class="service-panel" id="panel-literarias">
+      <div>
+        <h3 class="service-panel-title">Traduções<br/><em>Literárias</em></h3>
+        <p>A tradução literária é uma arte que vai além das palavras — é capturar o ritmo, o tom e a alma do texto original, recriando-o com fidelidade poética na língua de chegada.</p>
+        <p>Nossos tradutores literários são também escritores, com sensibilidade estética apurada para preservar a voz do autor.</p>
+        <ul class="service-features">
+          <li>Romances e obras de ficção</li>
+          <li>Poesia e literatura contemporânea</li>
+          <li>Contos e narrativas curtas</li>
+          <li>Literatura infantojuvenil</li>
+          <li>Ensaios e textos críticos</li>
+          <li>Biografias e memórias</li>
+        </ul>
+      </div>
+      <div class="service-visual">
+        <div class="service-icon">L</div>
+        <p class="service-quote">"As palavras têm peso, cor e som — traduzir é orquestrar tudo isso numa nova língua."</p>
+      </div>
+    </div>
+    <div class="service-panel" id="panel-revisao">
+      <div>
+        <h3 class="service-panel-title">Revisão<br/><em>de Texto</em></h3>
+        <p>Textos já traduzidos ganham nova vida sob o olhar criterioso de nossos revisores, que asseguram consistência terminológica, fluidez narrativa e correção gramatical impecável.</p>
+        <p>Nossa revisão vai além da correção — é um processo de polimento que eleva cada texto ao seu potencial máximo.</p>
+        <ul class="service-features">
+          <li>Revisão ortográfica e gramatical</li>
+          <li>Revisão estilística e de coesão</li>
+          <li>Adequação cultural e terminológica</li>
+          <li>Verificação de consistência</li>
+          <li>Revisão de traduções de terceiros</li>
+          <li>Proofreading final para publicação</li>
+        </ul>
+      </div>
+      <div class="service-visual">
+        <div class="service-icon">R</div>
+        <p class="service-quote">"A revisão é o momento em que o texto encontra a sua melhor versão."</p>
+      </div>
+    </div>
+    <div class="service-panel" id="panel-versao">
+      <div>
+        <h3 class="service-panel-title">Versão &<br/><em>Legendagem</em></h3>
+        <p>O conteúdo audiovisual exige tratamento especialíssimo: sincronização temporal, limitação de caracteres, naturalidade na fala e fidelidade ao conteúdo original coexistindo em perfeito equilíbrio.</p>
+        <p>Nossa equipe domina os padrões técnicos de legendagem para cinema, streaming, publicidade e conteúdo corporativo.</p>
+        <ul class="service-features">
+          <li>Legendas para cinema e TV</li>
+          <li>Legendagem para plataformas de streaming</li>
+          <li>Dublagem e adaptação de roteiros</li>
+          <li>Versão de conteúdo publicitário</li>
+          <li>Legendas para vídeos corporativos</li>
+          <li>Acessibilidade: legendas para surdos (LSE)</li>
+        </ul>
+      </div>
+      <div class="service-visual">
+        <div class="service-icon">V</div>
+        <p class="service-quote">"A imagem fala — nosso trabalho é garantir que o mundo inteiro a entenda."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contato-layout fade-in">
+    <div class="contato-info">
+      <div class="section-label">Fale Conosco</div>
+      <h2 class="section-title">Contato</h2>
+      <h3>Endereço</h3>
+      <p>Rua Augusta, 2560 — Conjunto 84<br/>Consolação — São Paulo, SP<br/>CEP 01412-100</p>
+      <div class="contato-divider"></div>
+      <h3>Telefone & WhatsApp</h3>
+      <p>+55 (11) 3456-7890<br/>+55 (11) 99876-5432</p>
+      <div class="contato-divider"></div>
+      <h3>E-mail</h3>
+      <p>contato@solaristrad.com.br<br/>orcamento@solaristrad.com.br</p>
+      <div class="contato-divider"></div>
+      <h3>Horário de Atendimento</h3>
+      <p>Segunda a Sexta: 9h às 18h<br/>Sábado: 9h às 13h</p>
+    </div>
+    <div class="orcamento-form">
+      <h3>Solicite um<br/><em style="font-style:italic;">Orçamento</em></h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input id="f-nome" type="text" placeholder="Seu nome"/>
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input id="f-email" type="email" placeholder="seu@email.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tipo de Serviço</label>
+        <select id="f-servico">
+          <option value="">Selecione um serviço</option>
+          <option>Tradução Técnica</option>
+          <option>Tradução Literária</option>
+          <option>Revisão de Texto</option>
+          <option>Versão e Legendagem</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Idioma de Origem</label>
+          <input id="f-origem" type="text" placeholder="Ex: Inglês"/>
+        </div>
+        <div class="form-group">
+          <label>Idioma de Destino</label>
+          <input id="f-destino" type="text" placeholder="Ex: Português"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mensagem</label>
+        <textarea id="f-mensagem" placeholder="Descreva seu projeto..."></textarea>
+      </div>
+      <button id="btn-enviar" class="btn-orcamento" style="width:100%;padding:1rem;font-size:0.75rem">
+        Enviar Solicitação
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL COMPROVANTE -->
+<div id="modal-comprovante" style="
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(17,16,16,0.6); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center;
+">
+  <div style="
+    background:var(--white); max-width:480px; width:90%;
+    border:1px solid var(--border); padding:3rem 2.5rem;
+    position:relative; animation: fadeUp 0.4s ease both;
+  ">
+    <!-- Star deco -->
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="22" fill="#F5E642"/>
+        <path d="M24 10 L26.5 19 L36 19 L28.5 24.5 L31 33.5 L24 28.5 L17 33.5 L19.5 24.5 L12 19 L21.5 19 Z" fill="#111010"/>
+      </svg>
+    </div>
+    <div style="
+      font-size:0.58rem; letter-spacing:0.45em; text-transform:uppercase;
+      color:var(--gray-text); text-align:center; margin-bottom:0.6rem;
+    ">Solaris Traduções</div>
+    <h3 style="
+      font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300;
+      text-align:center; margin-bottom:0.4rem; color:var(--black);
+    ">Solicitação Recebida</h3>
+    <div style="width:36px;height:2px;background:var(--yellow);margin:0 auto 2rem;"></div>
+
+    <div id="comprovante-corpo" style="font-size:0.78rem; line-height:1.9; color:var(--gray-text);"></div>
+
+    <div style="
+      margin-top:1.8rem; padding-top:1.2rem;
+      border-top:1px solid var(--border);
+      font-size:0.62rem; letter-spacing:0.1em; color:var(--gray-text); text-align:center;
+    ">
+      Um comprovante foi enviado para o seu e-mail.<br/>
+      Retornaremos em até <strong style="color:var(--black)">2 dias úteis</strong>.
+    </div>
+    <button onclick="fecharModal()" style="
+      margin-top:1.8rem; width:100%; padding:0.75rem;
+      background:var(--black); color:var(--yellow);
+      border:none; font-family:'Josefin Sans',sans-serif;
+      font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase;
+      font-weight:600; cursor:none; transition:background 0.2s;
+    " onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--black)'">
+      Fechar
+    </button>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Solaris Traduções</div>
+  <div class="footer-copy">© 2025 Solaris Traduções — Todos os direitos reservados</div>
+  <div class="footer-gold">✦ Transformando palavras, criando conexões</div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── EmailJS init ──────────────────────────────────────────────
+  emailjs.init('YOUR_PUBLIC_KEY'); // substitua pela sua Public Key do EmailJS
+
+  // ── Cursor ────────────────────────────────────────────────────
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    ring.style.left   = e.clientX + 'px';
+    ring.style.top    = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width  = '54px'; ring.style.height = '54px';
+      cursor.style.transform = 'translate(-50%, -50%) scale(1.6)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width  = '36px'; ring.style.height = '36px';
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+  });
+
+  // ── Tabs ──────────────────────────────────────────────────────
+  function switchTab(id) {
+    document.querySelectorAll('.service-tab').forEach((t,i) => {
+      const ids = ['tecnicas','literarias','revisao','versao'];
+      t.classList.toggle('active', ids[i] === id);
+    });
+    document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('panel-' + id);
+    if (panel) panel.classList.add('active');
+  }
+
+  // ── Scroll nav ────────────────────────────────────────────────
+  const sections = ['inicio','sobre','servicos','contato'];
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 200) current = id;
+    });
+    document.querySelectorAll('.nav-links a[data-section]').forEach(a => {
+      a.classList.toggle('active', a.dataset.section === current);
+    });
+  });
+
+  // ── Fade in ───────────────────────────────────────────────────
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // ── Formulário de orçamento ───────────────────────────────────
+  document.getElementById('btn-enviar').addEventListener('click', async () => {
+    const nome     = document.getElementById('f-nome').value.trim();
+    const email    = document.getElementById('f-email').value.trim();
+    const servico  = document.getElementById('f-servico').value;
+    const origem   = document.getElementById('f-origem').value.trim();
+    const destino  = document.getElementById('f-destino').value.trim();
+    const mensagem = document.getElementById('f-mensagem').value.trim();
+
+    if (!nome || !email || !servico) {
+      alert('Por favor, preencha Nome, E-mail e Tipo de Serviço.');
+      return;
+    }
+
+    const btn = document.getElementById('btn-enviar');
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+
+    const agora    = new Date();
+    const protocolo = 'SOL-' + agora.getFullYear()
+      + String(agora.getMonth()+1).padStart(2,'0')
+      + String(agora.getDate()).padStart(2,'0')
+      + '-' + String(agora.getTime()).slice(-4);
+    const dataFmt  = agora.toLocaleDateString('pt-BR', {
+      day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit'
+    });
+
+    const params = {
+      protocolo, nome, email, servico,
+      origem:   origem  || '—',
+      destino:  destino || '—',
+      mensagem: mensagem|| '—',
+      data:     dataFmt,
+    };
+
+    try {
+      // 1. E-mail para Gabriel
+      await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_INTERNO', {
+        ...params,
+        to_email: 'gabriel.zampieri77@gmail.com',
+        to_name:  'Gabriel Brandão',
+      });
+
+      // 2. Comprovante para o solicitante
+      await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_COMPROVANTE', {
+        ...params,
+        to_email: email,
+        to_name:  nome,
+      });
+
+      // 3. Exibe modal de comprovante
+      exibirComprovante(params);
+
+      // Limpa o formulário
+      ['f-nome','f-email','f-origem','f-destino','f-mensagem'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('f-servico').selectedIndex = 0;
+
+    } catch(err) {
+      console.error(err);
+      alert('Houve um erro ao enviar. Tente novamente ou entre em contato por e-mail.');
+    } finally {
+      btn.textContent = 'Enviar Solicitação';
+      btn.disabled = false;
+    }
+  });
+
+  function exibirComprovante(p) {
+    document.getElementById('comprovante-corpo').innerHTML = `
+      <table style="width:100%;border-collapse:collapse;">
+        <tr><td style="padding:0.4rem 0;color:#999;width:45%;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;">Protocolo</td>
+            <td style="font-weight:600;color:var(--black);font-size:0.78rem;">${p.protocolo}</td></tr>
+        <tr><td style="padding:0.4rem 0;color:#999;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;">Data</td>
+            <td style="color:var(--ink);font-size:0.78rem;">${p.data}</td></tr>
+        <tr><td style="padding:0.4rem 0;color:#999;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;">Solicitante</td>
+            <td style="color:var(--ink);font-size:0.78rem;">${p.nome}</td></tr>
+        <tr><td style="padding:0.4rem 0;color:#999;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;">E-mail</td>
+            <td style="color:var(--ink);font-size:0.78rem;">${p.email}</td></tr>
+        <tr><td style="padding:0.4rem 0;color:#999;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;">Serviço</td>
+            <td style="color:var(--ink);font-size:0.78rem;">${p.servico}</td></tr>
+        <tr><td style="padding:0.4rem 0;color:#999;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;">Idiomas</td>
+            <td style="color:var(--ink);font-size:0.78rem;">${p.origem} → ${p.destino}</td></tr>
+        <tr><td style="padding:0.4rem 0 0;color:#999;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;vertical-align:top;">Mensagem</td>
+            <td style="color:var(--ink);font-size:0.78rem;padding-top:0.4rem;">${p.mensagem}</td></tr>
+      </table>`;
+    const modal = document.getElementById('modal-comprovante');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharModal() {
+    document.getElementById('modal-comprovante').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Fechar clicando fora
+  document.getElementById('modal-comprovante').addEventListener('click', function(e) {
+    if (e.target === this) fecharModal();
+  });
+</script>
+</body>
+</html>
