@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -434,6 +434,103 @@
     }
 
 
+    /* SIMULADOR */
+    #simulador {
+      padding: 8rem 4rem;
+      background: var(--yellow-light);
+      border-top: 1px solid var(--border);
+    }
+    .simulador-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .sim-controls { display: flex; flex-direction: column; gap: 1.6rem; }
+    .sim-group label {
+      display: block; font-size: 0.6rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gray-text); margin-bottom: 0.5rem;
+    }
+    .sim-group select,
+    .sim-group input[type=range] {
+      width: 100%; background: var(--white);
+      border: 1px solid rgba(180,155,10,0.25); color: var(--black);
+      padding: 0.75rem 1rem; font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.76rem; outline: none; transition: border-color 0.3s;
+      appearance: none; cursor: none;
+    }
+    .sim-group select:focus { border-color: var(--black); }
+    .sim-group input[type=range] {
+      padding: 0; border: none; background: transparent;
+      accent-color: var(--black); cursor: none;
+    }
+    .sim-range-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      color: var(--gray-text); margin-top: 0.4rem;
+    }
+    .sim-range-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400; color: var(--black);
+    }
+    /* resultado */
+    .sim-result {
+      border: 1px solid rgba(180,155,10,0.25);
+      background: var(--white);
+      padding: 2.8rem 2.5rem;
+      position: sticky; top: 6rem;
+    }
+    .sim-result-label {
+      font-size: 0.58rem; letter-spacing: 0.45em; text-transform: uppercase;
+      color: var(--gray-text); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .sim-result-label::before { content:''; width:20px; height:1px; background:var(--black); display:inline-block; }
+    .sim-result h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300; color: var(--black);
+      margin-bottom: 0.3rem;
+    }
+    .sim-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.8rem; font-weight: 300; line-height: 1;
+      color: var(--black); margin: 1.2rem 0 0.3rem;
+      transition: all 0.4s ease;
+    }
+    .sim-price-note {
+      font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gray-text);
+      text-transform: uppercase; margin-bottom: 2rem;
+    }
+    .sim-breakdown {
+      border-top: 1px solid var(--border); padding-top: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .sim-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .sim-row-label {
+      font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray-text);
+    }
+    .sim-row-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; color: var(--black);
+    }
+    .sim-disclaimer {
+      margin-top: 1.8rem; padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.6rem; letter-spacing: 0.08em; line-height: 1.8;
+      color: rgba(90,88,72,0.5);
+    }
+    .sim-cta {
+      margin-top: 1.8rem; display: block; width: 100%;
+      padding: 0.85rem; text-align: center;
+      background: var(--black); color: var(--yellow);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 600; text-decoration: none;
+      transition: background 0.25s;
+      border: none; cursor: none;
+    }
+    .sim-cta:hover { background: #333; }
+
     /* CONTATO */
     #contato {
       padding: 8rem 4rem;
@@ -581,6 +678,7 @@
       </div>
     </li>
     <li><a href="#contato" data-section="contato">Contato</a></li>
+    <li><a href="#simulador" data-section="simulador">Simular Orçamento</a></li>
   </ul>
   <a href="#contato" class="btn-orcamento">Solicite Orçamento</a>
 </nav>
@@ -613,7 +711,7 @@
       <em>conexões</em>
     </h1>
     <p class="hero-desc">
-      Tradução não é apenas substituição de palavras — é a arte de preservar a essência, a emoção e o ritmo de cada texto através de línguas e culturas.
+      Tradução não é apenas substituição de palavras, é a arte de preservar a essência, a emoção, o ritmo e a intenção de cada texto através de línguas e culturas.
     </p>
     <div class="hero-cta">
       <a href="#contato" class="btn-orcamento">Solicite Orçamento</a>
@@ -622,7 +720,7 @@
   </div>
   <div class="hero-side">
     <span class="hero-star">✦</span>
-    <span class="hero-side-text">Est. 2010 — São Paulo — Brasil</span>
+    <span class="hero-side-text">Est. 2024 — São Paulo — Brasil</span>
     <span class="hero-star">✦</span>
   </div>
 </section>
@@ -636,12 +734,12 @@
     <div class="mvv-card">
       <div class="mvv-number">01</div>
       <h3>Missão</h3>
-      <p>Transformar palavras em pontes entre culturas e pessoas, através de traduções precisas, elegantes e culturalmente ressonantes. Acreditamos que cada palavra carrega um universo — nossa missão é preservá-lo.</p>
+      <p>Transformar palavras em pontes entre culturas e pessoas, através de traduções precisas e culturalmente ressonantes. Acreditamos que cada palavra carrega um universo e nossa missão é preservá-lo.</p>
     </div>
     <div class="mvv-card">
       <div class="mvv-number">02</div>
       <h3>Visão</h3>
-      <p>Ser a agência de tradução mais respeitada do Brasil, reconhecida pela excelência artesanal, pela confiança de nossos clientes e pelo impacto transformador que nossas traduções causam na comunicação global.</p>
+      <p>Ser a agência de tradução mais respeitada do Brasil, reconhecida pela excelência, pela confiança de nossos clientes, pela qualidade e pelo profissionalismo, além do impacto transformador que nossas traduções causam na comunicação global.</p>
     </div>
     <div class="mvv-card">
       <div class="mvv-number">03</div>
@@ -664,16 +762,16 @@
       <div class="section-label">Sobre Nós</div>
       <h2 class="section-title">Mais de uma<br/>década de palavra</h2>
       <p>A Solaris Traduções nasceu da crença de que traduzir é, antes de tudo, um ato de amor pelas línguas. Fundada em São Paulo, construímos ao longo dos anos uma reputação sólida na intersecção entre precisão técnica e sensibilidade literária.</p>
-      <div class="highlight">"Traduzir é ler com profundidade e escrever com alma."</div>
+      <div class="highlight">"Traduzir é ler com profundidade e escrever com alma." — Solaris Traduções</div>
       <p>Nossa equipe de especialistas reúne décadas de experiência em áreas diversas — do direito à literatura, da medicina às artes. Cada projeto é tratado com atenção individualizada, respeitando as particularidades do texto e as necessidades de cada cliente.</p>
     </div>
     <div class="stats-grid">
       <div class="stat-box">
-        <div class="stat-number">2+</div>
+        <div class="stat-number">03+</div>
         <div class="stat-label">Anos de atuação</div>
       </div>
       <div class="stat-box">
-        <div class="stat-number">6</div>
+        <div class="stat-number">06</div>
         <div class="stat-label">Idiomas disponíveis</div>
       </div>
       <div class="stat-box">
@@ -700,7 +798,7 @@
         <div class="team-name">Sophia Trindade</div>
         <div class="team-role">Tradutora Literária</div>
         <div class="team-langs">Inglês · Espanhol<br/>Esp.: Literária</div>
-        <a href="https://drive.google.com/file/d/1By5-OHZ7L2bL912tNLGHA5ygcay-ZPVe/view?usp=sharing" class="btn-portfolio" target="_blank">Ver portfólio</a>
+        <a href="portfolio-sophia.html" class="btn-portfolio" target="_blank">Ver portfólio</a>
       </div>
     </div>
     <div class="team-card">
@@ -803,7 +901,7 @@
     <div class="service-panel" id="panel-literarias">
       <div>
         <h3 class="service-panel-title">Traduções<br/><em>Literárias</em></h3>
-        <p>A tradução literária é uma arte que vai além das palavras — é capturar o ritmo, o tom e a alma do texto original, recriando-o com fidelidade poética na língua de chegada.</p>
+        <p>A tradução literária é uma arte que vai além das palavras. É capturar o ritmo, o tom, a alma e a inetnção do texto original, recriando-o com fidelidade poética na língua de chegada.</p>
         <p>Nossos tradutores literários são também escritores, com sensibilidade estética apurada para preservar a voz do autor.</p>
         <ul class="service-features">
           <li>Romances e obras de ficção</li>
@@ -816,14 +914,14 @@
       </div>
       <div class="service-visual">
         <div class="service-icon">L</div>
-        <p class="service-quote">"As palavras têm peso, cor e som — traduzir é orquestrar tudo isso numa nova língua."</p>
+        <p class="service-quote">"As palavras têm peso, cor e som. Traduzir é orquestrar tudo isso numa nova língua."</p>
       </div>
     </div>
     <div class="service-panel" id="panel-revisao">
       <div>
         <h3 class="service-panel-title">Revisão<br/><em>de Texto</em></h3>
         <p>Textos já traduzidos ganham nova vida sob o olhar criterioso de nossos revisores, que asseguram consistência terminológica, fluidez narrativa e correção gramatical impecável.</p>
-        <p>Nossa revisão vai além da correção — é um processo de polimento que eleva cada texto ao seu potencial máximo.</p>
+        <p>Nossa revisão vai além da correção, é um processo de polimento que eleva cada texto ao seu potencial máximo.</p>
         <ul class="service-features">
           <li>Revisão ortográfica e gramatical</li>
           <li>Revisão estilística e de coesão</li>
@@ -854,12 +952,121 @@
       </div>
       <div class="service-visual">
         <div class="service-icon">V</div>
-        <p class="service-quote">"A imagem fala — nosso trabalho é garantir que o mundo inteiro a entenda."</p>
+        <p class="service-quote">"A imagem fala, nosso trabalho é garantir que o mundo inteiro a entenda."</p>
       </div>
     </div>
   </div>
 </section>
 
+
+<!-- SIMULADOR DE ORÇAMENTO -->
+<section id="simulador">
+  <div class="section-label">Estimativa de Valores</div>
+  <h2 class="section-title">Simule seu<br/><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#7A6000;">Orçamento</em></h2>
+  <div class="simulador-layout fade-in">
+
+    <!-- CONTROLES -->
+    <div class="sim-controls">
+
+      <div class="sim-group">
+        <label>Tipo de Serviço</label>
+        <select id="sim-servico" onchange="calcular()">
+          <option value="tecnica">Tradução Técnica</option>
+          <option value="literaria">Tradução Literária</option>
+          <option value="revisao">Revisão de Texto</option>
+          <option value="versao">Versão e Legendagem</option>
+        </select>
+      </div>
+
+      <div class="sim-group">
+        <label>Combinação de Idiomas</label>
+        <select id="sim-idioma" onchange="calcular()">
+          <option value="0,80">Português ↔ Inglês</option>
+          <option value="0,50">Inglês ↔ Português</option>
+          <option value="0,80">Português ↔ Espanhol</option>
+          <option value="0,50">Espanhol ↔ Português</option>
+          <option value="0,80">Português ↔ Francês</option>
+          <option value="0,50">Francês ↔ Português</option>
+          <option value="0,80">Português ↔ Italiano</option>
+          <option value="0,50">Italiano ↔ Português</option>
+          <option value="0,80">Português ↔ Alemão</option>
+          <option value="0,50">Alemão ↔ Português</option>
+          <option value="0,80">Português ↔ Russo</option>
+          <option value="0,50">Russo ↔ Português</option>
+          <option value="0,80">Português ↔ Japonês</option>
+          <option value="0,50">Japonês ↔ Português</option>
+        </select>
+      </div>
+
+      <div class="sim-group">
+        <label>Número de Páginas — <span class="sim-range-val" id="sim-pag-val">10</span> pág.</label>
+        <input type="range" id="sim-paginas" min="1" max="1000" value="10" oninput="calcular()"/>
+        <div class="sim-range-row"><span>1 pág.</span><span>1000 pág.</span></div>
+      </div>
+
+      <div class="sim-group">
+        <label>Urgência do Prazo</label>
+        <select id="sim-urgencia" onchange="calcular()">
+          <option value="1">Normal (7+ dias úteis)</option>
+          <option value="1.2">Rápido (3–6 dias úteis)</option>
+          <option value="1.5">Urgente (1–2 dias úteis)</option>
+        </select>
+      </div>
+
+      <div class="sim-group">
+        <label>Nível de Especialização</label>
+        <select id="sim-nivel" onchange="calcular()">
+          <option value="1">Geral</option>
+          <option value="1.15">Especializado (jurídico, médico, técnico)</option>
+          <option value="1.3">Alta especialização (científico, literário)</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="sim-result">
+      <div class="sim-result-label">Estimativa calculada</div>
+      <h3>Valor estimado do projeto</h3>
+      <div class="sim-price" id="sim-total">R$ 850</div>
+      <div class="sim-price-note">* estimativa aproximada · sujeita a análise</div>
+
+      <div class="sim-breakdown">
+        <div class="sim-row">
+          <span class="sim-row-label">Serviço base</span>
+          <span class="sim-row-val" id="sim-base">—</span>
+        </div>
+        <div class="sim-row">
+          <span class="sim-row-label">Páginas × tarifa</span>
+          <span class="sim-row-val" id="sim-paginas-val">—</span>
+        </div>
+        <div class="sim-row">
+          <span class="sim-row-label">Fator de idioma</span>
+          <span class="sim-row-val" id="sim-idioma-val">—</span>
+        </div>
+        <div class="sim-row">
+          <span class="sim-row-label">Urgência</span>
+          <span class="sim-row-val" id="sim-urgencia-val">—</span>
+        </div>
+        <div class="sim-row">
+          <span class="sim-row-label">Especialização</span>
+          <span class="sim-row-val" id="sim-nivel-val">—</span>
+        </div>
+        <div class="sim-row" style="border-top:1px solid var(--border);padding-top:0.8rem;margin-top:0.4rem;">
+          <span class="sim-row-label" style="color:var(--black);font-weight:600">Prazo estimado</span>
+          <span class="sim-row-val" id="sim-prazo">—</span>
+        </div>
+      </div>
+
+      <div class="sim-disclaimer">
+        Esta simulação é apenas uma estimativa indicativa. O valor final depende da análise do texto, complexidade e disponibilidade da equipe. Solicite um orçamento formal abaixo.
+      </div>
+
+      <a href="#contato" class="sim-cta">Solicitar orçamento formal →</a>
+    </div>
+
+  </div>
+</section>
 
 <!-- CONTATO -->
 <section id="contato">
@@ -868,7 +1075,7 @@
       <div class="section-label">Fale Conosco</div>
       <h2 class="section-title">Contato</h2>
       <h3>Endereço</h3>
-      <p>Rua Augusta, 2560 — Conjunto 84<br/>Consolação — São Paulo, SP<br/>CEP 01412-100</p>
+      <p>Av. Higienópolis, 449<br/>Higienópolis, São Paulo - SP<br/>CEP 01238-001, Brasil</p>
       <div class="contato-divider"></div>
       <h3>Telefone & WhatsApp</h3>
       <p>+55 (11) 3456-7890<br/>+55 (11) 99876-5432</p>
@@ -1018,7 +1225,7 @@
   }
 
   // ── Scroll nav ────────────────────────────────────────────────
-  const sections = ['inicio','sobre','servicos','contato'];
+  const sections = ['inicio','sobre','servicos','simulador','contato'];
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(id => {
@@ -1034,6 +1241,45 @@
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // ── Simulador de orçamento ────────────────────────────────────
+  const tarifaBase = { tecnica: 85, literaria: 110, revisao: 55, versao: 130 };
+  const nomeServico = { tecnica:'Tradução Técnica', literaria:'Tradução Literária', revisao:'Revisão de Texto', versao:'Versão e Legendagem' };
+  const urgenciaLabel = { '1':'Normal', '1.2':'Rápido (+20%)', '1.5':'Urgente (+50%)' };
+  const nivelLabel = { '1':'Geral', '1.15':'Especializado (+15%)', '1.3':'Alta especialização (+30%)' };
+  const prazoBase = { tecnica:1.5, literaria:2, revisao:0.8, versao:2.5 }; // dias/pag
+
+  function fmt(v) { return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
+  function pct(v) { return v === 1 ? '×1.0' : '×' + v.toFixed(2); }
+
+  function calcular() {
+    const servico  = document.getElementById('sim-servico').value;
+    const idioma   = parseFloat(document.getElementById('sim-idioma').value);
+    const paginas  = parseInt(document.getElementById('sim-paginas').value);
+    const urgencia = parseFloat(document.getElementById('sim-urgencia').value);
+    const nivel    = parseFloat(document.getElementById('sim-nivel').value);
+
+    document.getElementById('sim-pag-val').textContent = paginas;
+
+    const base    = tarifaBase[servico];
+    const subtotal = base * paginas;
+    const total    = subtotal * idioma * urgencia * nivel;
+
+    // prazo
+    const diasBrutos = Math.ceil(paginas * prazoBase[servico] / urgencia);
+    const prazoTexto = diasBrutos <= 1 ? '1 dia útil'
+                     : diasBrutos + ' dias úteis';
+
+    document.getElementById('sim-total').textContent = fmt(total);
+    document.getElementById('sim-base').textContent  = nomeServico[servico] + ' · ' + fmt(base) + '/pág.';
+    document.getElementById('sim-paginas-val').textContent = paginas + ' pág. × ' + fmt(base) + ' = ' + fmt(subtotal);
+    document.getElementById('sim-idioma-val').textContent  = pct(idioma);
+    document.getElementById('sim-urgencia-val').textContent = urgenciaLabel[String(urgencia)];
+    document.getElementById('sim-nivel-val').textContent   = nivelLabel[String(nivel)];
+    document.getElementById('sim-prazo').textContent       = prazoTexto;
+  }
+  calcular(); // inicializa
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
   // ── Formulário de orçamento ───────────────────────────────────
