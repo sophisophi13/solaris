@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfólio — Leticia Storel · Solaris Traduções</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --yellow: #F5E642;
+      --yellow-pastel: #FDF3A0;
+      --yellow-light: #FEFADC;
+      --black: #111010;
+      --ink: #1C1B18;
+      --white: #FEFEFE;
+      --cream: #FDFAF0;
+      --gray-text: #5A5848;
+      --border: rgba(200,175,20,0.22);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CURSOR */
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--black); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--black); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s, transform 0.35s;
+      opacity: 0.4;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 4rem;
+      background: rgba(254,254,254,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-logo {
+      display: flex; align-items: center; gap: 0.7rem;
+      text-decoration: none;
+    }
+    .topbar-logo svg { width: 40px; height: 40px; }
+    .topbar-brand { display: flex; flex-direction: column; gap: 1px; }
+    .topbar-brand span:first-child {
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.28em;
+      color: var(--black); text-transform: uppercase; line-height: 1;
+    }
+    .topbar-brand span:last-child {
+      font-size: 0.52rem; letter-spacing: 0.5em; color: var(--gray-text);
+      text-transform: uppercase;
+    }
+    .topbar-back {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gray-text); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .topbar-back:hover { color: var(--black); }
+    .topbar-back::before {
+      content: '←'; font-size: 1rem; line-height: 1;
+      transition: transform 0.25s;
+    }
+    .topbar-back:hover::before { transform: translateX(-3px); }
+
+    /* HERO DO PERFIL */
+    .profile-hero {
+      min-height: 52vh;
+      display: flex; align-items: flex-end;
+      padding: 9rem 4rem 4rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .profile-hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 90% 40%, rgba(245,230,66,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 40% at 10% 90%, rgba(245,230,66,0.08) 0%, transparent 60%);
+    }
+    /* Decorative globe */
+    .profile-globe {
+      position: absolute; right: -80px; top: 50%; transform: translateY(-50%);
+      width: 420px; height: 420px; opacity: 0.06; pointer-events: none;
+    }
+    .profile-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,175,20,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,175,20,0.1) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+    }
+    .profile-content {
+      position: relative; z-index: 2;
+      display: flex; align-items: flex-end; gap: 3rem;
+      animation: fadeUp 0.9s ease both;
+    }
+    .profile-avatar {
+      width: 110px; height: 110px; flex-shrink: 0;
+      background: var(--yellow-light);
+      border: 1px solid rgba(180,155,10,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem; font-weight: 300; color: var(--black);
+      position: relative;
+    }
+    .profile-avatar::before {
+      content: '✦'; position: absolute; top: 6px; right: 8px;
+      font-size: 0.65rem; opacity: 0.3;
+    }
+    .profile-meta { padding-bottom: 0.4rem; }
+    .profile-label {
+      font-size: 0.58rem; letter-spacing: 0.5em; color: var(--gray-text);
+      text-transform: uppercase; margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .profile-label::before { content: ''; width: 24px; height: 1px; background: var(--black); display: inline-block; }
+    .profile-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 300; line-height: 1.05; color: var(--black);
+      margin-bottom: 0.8rem;
+    }
+    .profile-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 0.35rem 0.8rem; border: 1px solid var(--border);
+      color: var(--gray-text); background: var(--cream);
+    }
+    .tag-highlight {
+      background: var(--yellow); border-color: var(--yellow); color: var(--black);
+      font-weight: 600;
+    }
+
+    /* FILTRO */
+    .filter-bar {
+      display: flex; align-items: center; gap: 0;
+      padding: 0 4rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+      overflow-x: auto;
+    }
+    .filter-label {
+      font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gray-text); padding: 1.2rem 1.5rem 1.2rem 0;
+      border-right: 1px solid var(--border); margin-right: 0.5rem;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .filter-btn {
+      padding: 1.2rem 1.2rem; background: none; border: none;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gray-text); cursor: none; transition: color 0.25s;
+      position: relative; white-space: nowrap;
+    }
+    .filter-btn::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--black);
+      transform: scaleX(0); transition: transform 0.25s;
+    }
+    .filter-btn:hover, .filter-btn.active { color: var(--black); }
+    .filter-btn.active::after { transform: scaleX(1); }
+
+    /* GRID DE CARDS */
+    .portfolio-section {
+      padding: 4rem 4rem 6rem;
+    }
+    .section-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 2.5rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 300; color: var(--black);
+    }
+    .section-count {
+      font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gray-text);
+      text-transform: uppercase;
+    }
+
+    /* MASONRY-LIKE: CSS columns */
+    .cards-grid {
+      columns: 3;
+      column-gap: 1.5rem;
+    }
+    @media (max-width: 1100px) { .cards-grid { columns: 2; } }
+    @media (max-width: 680px)  { .cards-grid { columns: 1; } }
+
+    .translation-card {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(180,155,10,0.2);
+      background: var(--white);
+      padding: 2rem 1.8rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.35s, box-shadow 0.35s;
+      animation: fadeUp 0.6s ease both;
+    }
+    .translation-card:hover {
+      border-color: var(--yellow);
+      box-shadow: 0 6px 28px rgba(200,175,20,0.13);
+    }
+    .translation-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--yellow), var(--yellow-pastel));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.45s;
+    }
+    .translation-card:hover::before { transform: scaleX(1); }
+
+    /* Número decorativo */
+    .card-num {
+      position: absolute; top: 1rem; right: 1.4rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 300; line-height: 1;
+      color: rgba(200,175,20,0.1);
+    }
+
+    .card-langs {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .lang-badge {
+      font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 0.28rem 0.65rem; border: 1px solid var(--border);
+      color: var(--gray-text); background: var(--cream);
+    }
+    .lang-arrow {
+      font-size: 0.7rem; color: var(--gray-text); opacity: 0.5;
+    }
+
+    .card-type {
+      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gray-text); margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .card-type::before { content: ''; width: 16px; height: 1px; background: var(--black); display: inline-block; }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 400; line-height: 1.2;
+      color: var(--black); margin-bottom: 0.4rem;
+    }
+    .card-author {
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      color: var(--gray-text); font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Texto expansível */
+    .card-text-wrap { position: relative; }
+    .card-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem; line-height: 1.85;
+      color: var(--gray-text);
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .card-text.collapsed { max-height: 4.5em; }
+    .card-text.expanded  { max-height: 9999px; }
+
+    /* Fade na borda do texto colapsado */
+    .card-fade {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2.5rem;
+      background: linear-gradient(transparent, var(--white));
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .card-fade.hidden { opacity: 0; }
+
+    .card-toggle {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.9rem; background: none; border: none;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gray-text); cursor: none; transition: color 0.25s;
+      padding: 0;
+    }
+    .card-toggle:hover { color: var(--black); }
+    .card-toggle .arrow { transition: transform 0.3s; display: inline-block; }
+    .card-toggle.open .arrow { transform: rotate(180deg); }
+
+    .card-footer {
+      margin-top: 1.4rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-year {
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      color: rgba(90,88,72,0.4); text-transform: uppercase;
+    }
+    .card-link {
+      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--black); text-decoration: none; font-weight: 600;
+      transition: letter-spacing 0.25s;
+    }
+    .card-link:hover { letter-spacing: 0.3em; }
+
+    /* Seção vazia (quando filtro não tem resultado) */
+    .empty-state {
+      display: none; text-align: center;
+      padding: 5rem 0; color: var(--gray-text);
+    }
+    .empty-state.visible { display: block; }
+    .empty-state p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-style: italic; opacity: 0.5;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2.2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--black);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem; letter-spacing: 0.2em;
+      color: rgba(254,254,254,0.35); text-transform: uppercase;
+    }
+    .footer-star { color: var(--yellow); font-size: 0.6rem; letter-spacing: 0.2em; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+    @media (max-width: 700px) {
+      .topbar, .filter-bar, .portfolio-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .profile-hero { padding: 8rem 1.5rem 3rem; }
+      .profile-content { flex-direction: column; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="62" r="52" fill="#F5E642"/>
+      <ellipse cx="60" cy="66" rx="32" ry="32" stroke="#111010" stroke-width="1.4" fill="none"/>
+      <ellipse cx="60" cy="66" rx="16" ry="32" stroke="#111010" stroke-width="1" fill="none"/>
+      <ellipse cx="60" cy="66" rx="32" ry="13" stroke="#111010" stroke-width="1" fill="none"/>
+      <line x1="28" y1="66" x2="92" y2="66" stroke="#111010" stroke-width="1"/>
+      <line x1="60" y1="34" x2="60" y2="98" stroke="#111010" stroke-width="1"/>
+      <ellipse cx="65" cy="62" rx="38" ry="10" stroke="#111010" stroke-width="1.6" fill="none" transform="rotate(-22 65 62)"/>
+      <path d="M90 28 L92 33 L97 35 L92 37 L90 42 L88 37 L83 35 L88 33 Z" fill="#111010"/>
+      <path d="M98 40 L99 43 L102 44 L99 45 L98 48 L97 45 L94 44 L97 43 Z" fill="#111010"/>
+    </svg>
+    <div class="topbar-brand">
+      <span>Solaris</span>
+      <span>Traduções</span>
+    </div>
+  </a>
+  <a href="index.html#equipe" class="topbar-back">Voltar à equipe</a>
+</header>
+
+<!-- HERO DO PERFIL -->
+<section class="profile-hero">
+  <div class="profile-hero-bg"></div>
+  <div class="profile-grid"></div>
+  <svg class="profile-globe" viewBox="0 0 420 420" fill="none">
+    <ellipse cx="210" cy="210" rx="180" ry="180" stroke="#111010" stroke-width="1.2" fill="none"/>
+    <ellipse cx="210" cy="210" rx="90" ry="180" stroke="#111010" stroke-width="0.8" fill="none"/>
+    <ellipse cx="210" cy="210" rx="180" ry="72" stroke="#111010" stroke-width="0.8" fill="none"/>
+    <ellipse cx="210" cy="210" rx="180" ry="135" stroke="#111010" stroke-width="0.6" fill="none"/>
+    <line x1="30" y1="210" x2="390" y2="210" stroke="#111010" stroke-width="0.6"/>
+    <line x1="210" y1="30" x2="210" y2="390" stroke="#111010" stroke-width="0.6"/>
+    <ellipse cx="225" cy="195" rx="210" ry="55" stroke="#111010" stroke-width="1.6" fill="none" transform="rotate(-20 225 195)"/>
+  </svg>
+  <div class="profile-content">
+    <!--
+      ╔══════════════════════════════════════════════════════════╗
+      ║  EDITE AQUI: iniciais, nome, especialidade e idiomas     ║
+      ╚══════════════════════════════════════════════════════════╝
+    -->
+    <div class="profile-avatar" id="avatar-iniciais">LS</div>
+    <div class="profile-meta">
+      <div class="profile-label">Portfólio · Solaris Traduções</div>
+      <h1 class="profile-name" id="perfil-nome">Leticia Storel</h1>
+      <div class="profile-tags">
+        <span class="tag tag-highlight" id="perfil-role">Legendagem & Audiovisual</span>
+        <span class="tag" id="perfil-idiomas">Inglês · Espanhol</span>
+        <span class="tag" id="perfil-esp">Audiovisual & Mídia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTRO -->
+<div class="filter-bar" id="filter-bar">
+  <span class="filter-label">Filtrar por</span>
+  <button class="filter-btn active" data-filter="todos">Todos</button>
+  <button class="filter-btn" data-filter="tecnica">Técnica</button>
+  <button class="filter-btn" data-filter="literaria">Literária</button>
+  <button class="filter-btn" data-filter="juridica">Jurídica</button>
+  <button class="filter-btn" data-filter="revisao">Revisão</button>
+</div>
+
+<!-- PORTFÓLIO -->
+<main class="portfolio-section">
+  <div class="section-header">
+    <h2 class="section-header-title">Trabalhos <em style="font-style:italic;color:#7A6000;">selecionados</em></h2>
+    <span class="section-count" id="count-label">4 trabalhos</span>
+  </div>
+
+  <div class="empty-state" id="empty-state">
+    <p>Nenhum trabalho nesta categoria ainda.</p>
+  </div>
+
+  <!--
+    ╔═══════════════════════════════════════════════════════════════════╗
+    ║  CARDS DE TRADUÇÃO — duplique o bloco abaixo para adicionar mais  ║
+    ║                                                                   ║
+    ║  data-filter = tecnica | literaria | juridica | revisao           ║
+    ║  (use exatamente essas palavras para o filtro funcionar)          ║
+    ╚═══════════════════════════════════════════════════════════════════╝
+  -->
+  <div class="cards-grid" id="cards-grid">
+
+    <!-- CARD 1 -->
+    <article class="translation-card" data-filter="juridica">
+      <div class="card-num">01</div>
+      <div class="card-langs">
+        <span class="lang-badge"></span>
+        <span class="lang-arrow">→</span>
+        <span class="lang-badge"></span>
+      </div>
+      <div class="card-type"></div>
+      <h2 class="card-title"></h2>
+      <p class="card-author"></p>
+      <div class="card-text-wrap">
+        <div class="card-text collapsed">
+          
+        </div>
+        <div class="card-fade"></div>
+      </div>
+      <button class="card-toggle" onclick="toggleCard(this)">
+        Ler mais <span class="arrow">↓</span>
+      </button>
+      <div class="card-footer">
+        <span class="card-year"></span>
+        <a href="#" class="card-link">Ver documento →</a>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="translation-card" data-filter="tecnica">
+      <div class="card-num">02</div>
+      <div class="card-langs">
+        <span class="lang-badge">Inglês</span>
+        <span class="lang-arrow">→</span>
+        <span class="lang-badge">Português</span>
+      </div>
+      <div class="card-type">Técnica</div>
+      <h2 class="card-title">Fotossíntese</h2>
+      <p class="card-author">Hans Lambers · 2026</p>
+      <div class="card-text-wrap">
+        <div class="card-text collapsed">
+          
+        </div>
+        <div class="card-fade"></div>
+      </div>
+      <button class="card-toggle" onclick="toggleCard(this)">
+        Ler mais <span class="arrow">↓</span>
+      </button>
+      <div class="card-footer">
+        <span class="card-year">2026</span>
+        <a href="https://drive.google.com/file/d/1cU9zM8erTV2mPHgDqvJznWEYRR_Xvz-N/view?usp=sharing" class="card-link">Ver documento →</a>
+      </div>
+    </article>
+
+    <!-- CARD 3 — TEXTO LONGO -->
+    <article class="translation-card" data-filter="literaria">
+      <div class="card-num">03</div>
+      <div class="card-langs">
+        <span class="lang-badge">Inglês</span>
+        <span class="lang-arrow">→</span>
+        <span class="lang-badge">Português</span>
+      </div>
+      <div class="card-type">Literária</div>
+      <h2 class="card-title">O Presente dos Magos</h2>
+      <p class="card-author">Autor: O. Henry · 1905</p>
+      <div class="card-text-wrap">
+        <div class="card-text collapsed">
+          "O Presente dos Magos" é um conto do escritor americano O. Henry, publicado pela primeira vez em 1905. A história narra a vida de um jovem casal e como eles enfrentam o desafio de comprar presentes secretos de Natal um para o outro, dispondo de apenas uma pequena quantia de dinheiro.
+        </div>
+        <div class="card-fade"></div>
+      </div>
+      <button class="card-toggle" onclick="toggleCard(this)">
+        Ler mais <span class="arrow">↓</span>
+      </button>
+      <div class="card-footer">
+        <span class="card-year">2026</span>
+        <a href="https://drive.google.com/file/d/1qU8AM8qlGK7aDqXcQQ_j9xMO28KnTbkW/view?usp=sharing" class="card-link">Ver documento →</a>
+      </div>
+    </article>
+
+    <!-- CARD 4 — TEXTO CURTO (sem botão expandir) -->
+    <article class="translation-card" data-filter="revisao">
+      <div class="card-num">04</div>
+      <div class="card-langs">
+        <span class="lang-badge"></span>
+        <span class="lang-arrow">→</span>
+        <span class="lang-badge"></span>
+      </div>
+      <div class="card-type"></div>
+      <h2 class="card-title"></h2>
+      <p class="card-author"></p>
+      <div class="card-text-wrap">
+        <div class="card-text expanded">
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-year"></span>
+        <a href="#" class="card-link">Ver documento →</a>
+      </div>
+    </article>
+
+  </div><!-- /cards-grid -->
+</main>
+
+<footer>
+  <div class="footer-logo">Solaris Traduções</div>
+  <div class="footer-star">✦ Transformando palavras, criando conexões</div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+    ring.style.left   = e.clientX + 'px'; ring.style.top   = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '54px'; ring.style.height = '54px';
+      cursor.style.transform = 'translate(-50%,-50%) scale(1.6)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px'; ring.style.height = '36px';
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    });
+  });
+
+  // Toggle expandir/recolher texto do card
+  function toggleCard(btn) {
+    const wrap = btn.previousElementSibling; // .card-text-wrap
+    const text = wrap.querySelector('.card-text');
+    const fade = wrap.querySelector('.card-fade');
+    const open = text.classList.contains('expanded');
+    text.classList.toggle('expanded', !open);
+    text.classList.toggle('collapsed', open);
+    if (fade) fade.classList.toggle('hidden', !open);
+    btn.classList.toggle('open', !open);
+    btn.innerHTML = open
+      ? 'Ler mais <span class="arrow">↓</span>'
+      : 'Recolher <span class="arrow" style="transform:rotate(180deg);display:inline-block">↓</span>';
+  }
+
+  // Filtro
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.translation-card');
+  const countLabel = document.getElementById('count-label');
+  const emptyState = document.getElementById('empty-state');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      let visible = 0;
+      cards.forEach(card => {
+        const show = f === 'todos' || card.dataset.filter === f;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      countLabel.textContent = visible + (visible === 1 ? ' trabalho' : ' trabalhos');
+      emptyState.classList.toggle('visible', visible === 0);
+    });
+  });
+
+  // Conta inicial
+  countLabel.textContent = cards.length + ' trabalhos';
+</script>
+</body>
+</html>
