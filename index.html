@@ -124,7 +124,7 @@
       transition: background 0.3s, transform 0.2s;
       text-decoration: none; display: inline-block;
     }
-    .btn-orcamento:hover { background: var(--black); color: var(--yellow); transform: translateY(-1px); }
+    .btn-orcamento:hover { background: var(--ink); color: var(--white); transform: translateY(-1px); }
 
 
     section { min-height: 100vh; padding: 0; }
@@ -187,7 +187,7 @@
       font-weight: 600; transition: background 0.3s, color 0.3s;
       font-family: 'Josefin Sans', sans-serif;
     }
-    .btn-outline:hover { background: var(--black); color: var(--white); }
+    .btn-outline:hover { background: var(--ink); color: var(--white); }
     .hero-side {
       position: absolute; right: 4rem; top: 50%; transform: translateY(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 1rem;
@@ -308,7 +308,8 @@
       border-top: 1px solid var(--border);
     }
     .team-grid {
-      display: grid; grid-template-columns: repeat(6, 1fr);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
       gap: 1rem; margin-top: 3rem;
     }
     .team-card {
@@ -434,125 +435,67 @@
     }
 
 
-    /* SIMULADOR */
+    /* ORÇAMENTO GRID */
+    .orcamento-duplo {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    @media (max-width: 960px) { .orcamento-duplo { grid-template-columns: 1fr; } }
+
+    /* FAQ */
+    .faq-col { display: flex; flex-direction: column; }
+    .faq-header { margin-bottom: 1.8rem; }
+    .faq-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      font-weight: 300; line-height: 1.1; color: var(--black);
+    }
+    .faq-title em { font-style: italic; color: #7A6000; }
+    .faq-list { border-top: 1px solid var(--border); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; gap: 1.2rem;
+      padding: 1.1rem 0; background: none; border: none;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.06em;
+      color: var(--black); text-align: left; cursor: none;
+      transition: color 0.25s; font-weight: 400; line-height: 1.4;
+    }
+    .faq-question:hover { color: var(--gray-text); }
+    .faq-icon {
+      font-size: 1.1rem; font-weight: 300; line-height: 1;
+      color: var(--black); flex-shrink: 0;
+      transition: transform 0.35s ease;
+      display: inline-block; width: 18px; text-align: center;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.45s ease, padding 0.3s ease;
+      padding-bottom: 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      padding-bottom: 1.1rem;
+    }
+    .faq-answer p {
+      font-size: 0.77rem; line-height: 2;
+      color: var(--gray-text);
+    }
+    .faq-answer strong { color: var(--black); font-weight: 600; }
+
+    /* ORÇAMENTO SECTION */
     #simulador {
       padding: 8rem 4rem;
       background: var(--yellow-light);
       border-top: 1px solid var(--border);
     }
-    .simulador-layout {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: start;
-    }
-    .sim-controls { display: flex; flex-direction: column; gap: 1.6rem; }
-    .sim-group label {
-      display: block; font-size: 0.6rem; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--gray-text); margin-bottom: 0.5rem;
-    }
-    .sim-group select,
-    .sim-group input[type=range] {
-      width: 100%; background: var(--white);
-      border: 1px solid rgba(180,155,10,0.25); color: var(--black);
-      padding: 0.75rem 1rem; font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.76rem; outline: none; transition: border-color 0.3s;
-      appearance: none; cursor: none;
-    }
-    .sim-group select:focus { border-color: var(--black); }
-    .sim-group input[type=range] {
-      padding: 0; border: none; background: transparent;
-      accent-color: var(--black); cursor: none;
-    }
-    .sim-range-row {
-      display: flex; justify-content: space-between;
-      font-size: 0.62rem; letter-spacing: 0.1em;
-      color: var(--gray-text); margin-top: 0.4rem;
-    }
-    .sim-range-val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 400; color: var(--black);
-    }
-    /* resultado */
-    .sim-result {
-      border: 1px solid rgba(180,155,10,0.25);
-      background: var(--white);
-      padding: 2.8rem 2.5rem;
-      position: sticky; top: 6rem;
-    }
-    .sim-result-label {
-      font-size: 0.58rem; letter-spacing: 0.45em; text-transform: uppercase;
-      color: var(--gray-text); margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .sim-result-label::before { content:''; width:20px; height:1px; background:var(--black); display:inline-block; }
-    .sim-result h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; font-weight: 300; color: var(--black);
-      margin-bottom: 0.3rem;
-    }
-    .sim-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.8rem; font-weight: 300; line-height: 1;
-      color: var(--black); margin: 1.2rem 0 0.3rem;
-      transition: all 0.4s ease;
-    }
-    .sim-price-note {
-      font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gray-text);
-      text-transform: uppercase; margin-bottom: 2rem;
-    }
-    .sim-breakdown {
-      border-top: 1px solid var(--border); padding-top: 1.5rem;
-      display: flex; flex-direction: column; gap: 0.8rem;
-    }
-    .sim-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-    }
-    .sim-row-label {
-      font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray-text);
-    }
-    .sim-row-val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem; color: var(--black);
-    }
-    .sim-disclaimer {
-      margin-top: 1.8rem; padding-top: 1.2rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.6rem; letter-spacing: 0.08em; line-height: 1.8;
-      color: rgba(90,88,72,0.5);
-    }
-    .sim-cta {
-      margin-top: 1.8rem; display: block; width: 100%;
-      padding: 0.85rem; text-align: center;
-      background: var(--black); color: var(--yellow);
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
-      font-weight: 600; text-decoration: none;
-      transition: background 0.25s;
-      border: none; cursor: none;
-    }
-    .sim-cta:hover { background: #333; }
 
-    /* CONTATO */
-    #contato {
-      padding: 8rem 4rem;
-      background: var(--white);
-      border-top: 1px solid var(--border);
-    }
-    .contato-layout {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: start;
-    }
-    .contato-info h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-weight: 400;
-      color: var(--black); margin-bottom: 0.7rem;
-      margin-top: 2.5rem;
-    }
-    .contato-info h3:first-child { margin-top: 0; }
-    .contato-info p { font-size: 0.8rem; line-height: 2; color: var(--gray-text); }
-    .contato-divider { width: 36px; height: 1.5px; background: var(--yellow); margin: 1.8rem 0; }
+    /* FORMULÁRIO */
     .orcamento-form {
       border: 1px solid rgba(180,155,10,0.2); padding: 3rem;
-      background: var(--yellow-light);
+      background: var(--white);
     }
     .orcamento-form h3 {
       font-family: 'Cormorant Garamond', serif;
@@ -566,7 +509,7 @@
     .form-group input,
     .form-group select,
     .form-group textarea {
-      width: 100%; background: var(--white);
+      width: 100%; background: var(--cream);
       border: 1px solid rgba(180,155,10,0.25); color: var(--black);
       padding: 0.75rem 1rem; font-family: 'Josefin Sans', sans-serif;
       font-size: 0.76rem; letter-spacing: 0.04em;
@@ -575,10 +518,24 @@
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus { border-color: var(--black); }
-    .form-group textarea { height: 90px; resize: none; }
+    .form-group textarea { height: 110px; resize: none; }
     .form-group select { appearance: none; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
+    /* CONTATO */
+    #contato {
+      padding: 8rem 4rem;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .contato-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400;
+      color: var(--black); margin-bottom: 0.6rem; margin-top: 2rem;
+    }
+    .contato-info h3:first-child { margin-top: 0; }
+    .contato-info p { font-size: 0.8rem; line-height: 2; color: var(--gray-text); }
+    .contato-divider { width: 30px; height: 1.5px; background: var(--yellow); margin: 1.4rem 0; }
 
     /* FOOTER */
     footer {
@@ -677,8 +634,8 @@
         <a href="#servicos" onclick="switchTab('versao')">Versão e Legendagem</a>
       </div>
     </li>
+    <li><a href="#simulador" data-section="simulador">Orçamento</a></li>
     <li><a href="#contato" data-section="contato">Contato</a></li>
-    <li><a href="#simulador" data-section="simulador">Simular Orçamento</a></li>
   </ul>
   <a href="#contato" class="btn-orcamento">Solicite Orçamento</a>
 </nav>
@@ -792,24 +749,8 @@
   <div class="section-label">Nossa Equipe</div>
   <h2 class="section-title">Os tradutores<br/>por trás das palavras</h2>
   <div class="team-grid">
-    <div class="team-card">
-      <div class="team-avatar">ST</div>
-      <div class="team-info">
-        <div class="team-name">Sophia Trindade</div>
-        <div class="team-role">Tradutora Literária</div>
-        <div class="team-langs">Inglês · Espanhol<br/>Esp.: Literária</div>
-        <a href="portfolio-sophia.html" class="btn-portfolio" target="_blank">Ver portfólio</a>
-      </div>
-    </div>
-    <div class="team-card">
-      <div class="team-avatar">GB</div>
-      <div class="team-info">
-        <div class="team-name">Gabriel Brandão</div>
-        <div class="team-role">Tradutor Técnico & Revisor</div>
-        <div class="team-langs">Inglês · Italiano<br/>Esp.: Direito & Finanças</div>
-        <a href="https://drive.google.com/file/d/1TdgyMAlOzAl561LYyZMOlWyGwZuZr1ED/view?usp=sharing" class="btn-portfolio" target="_blank">Ver portfólio</a>
-      </div>
-    </div>
+
+    <!-- Amanda Gabriela -->
     <div class="team-card">
       <div class="team-avatar">AG</div>
       <div class="team-info">
@@ -819,42 +760,8 @@
         <a href="https://drive.google.com/file/d/1hoBhbhSZAHjtin6S_e0JZ3ibyVPk4vOr/view?usp=sharing" class="btn-portfolio" target="_blank">Ver portfólio</a>
       </div>
     </div>
-    <div class="team-card">
-      <div class="team-avatar">LS</div>
-      <div class="team-info">
-        <div class="team-name">Leticia Storel</div>
-        <div class="team-role">Legendagem & Audiovisual</div>
-        <div class="team-langs">Inglês<br/>Esp.: Audiovisual & Mídia</div>
-        <a href="LINK_DO_PORTFOLIO_AQUI" class="btn-portfolio" target="_blank">Ver portfólio</a>
-      </div>
-    </div>
-    <div class="team-card">
-      <div class="team-avatar">JM</div>
-      <div class="team-info">
-        <div class="team-name">Jaqueline Matsumoto</div>
-        <div class="team-role">Tradutora Científica</div>
-        <div class="team-langs">Inglês · Japonês<br/>Esp.: Medicina & Ciências</div>
-        <a href="LINK_DO_PORTFOLIO_AQUI" class="btn-portfolio" target="_blank">Ver portfólio</a>
-      </div>
-    </div>
-     <div class="team-card">
-      <div class="team-avatar">NM</div>
-      <div class="team-info">
-        <div class="team-name">Natasha Mattos</div>
-        <div class="team-role">Tradutora de Jogos</div>
-        <div class="team-langs">Inglês<br/>Esp.: Jogos</div>
-        <a href="LINK_DO_PORTFOLIO_AQUI" class="btn-portfolio" target="_blank">Ver portfólio</a>
-      </div>
-    </div>
-     <div class="team-card">
-      <div class="team-avatar">MG</div>
-      <div class="team-info">
-        <div class="team-name">Malu Gregório</div>
-        <div class="team-role">Revisora</div>
-        <div class="team-langs">Inglês · Russo<br/>Esp.: Literária & Técnica</div>
-        <a href="https://drive.google.com/file/d/1V4FJKmmtGEEATuM_HojwMrzfRsMxrY5a/view?usp=sharing" class="btn-portfolio" target="_blank">Ver portfólio</a>
-      </div>
-    </div>
+
+    <!-- Ana Sara -->
     <div class="team-card">
       <div class="team-avatar">AS</div>
       <div class="team-info">
@@ -864,6 +771,73 @@
         <a href="LINK_DO_PORTFOLIO_AQUI" class="btn-portfolio" target="_blank">Ver portfólio</a>
       </div>
     </div>
+
+    <!-- Gabriel Brandão -->
+    <div class="team-card">
+      <div class="team-avatar">GB</div>
+      <div class="team-info">
+        <div class="team-name">Gabriel Brandão</div>
+        <div class="team-role">Tradutor Técnico & Revisor</div>
+        <div class="team-langs">Inglês · Italiano<br/>Esp.: Direito & Finanças</div>
+        <a href="https://drive.google.com/file/d/1TdgyMAlOzAl561LYyZMOlWyGwZuZr1ED/view?usp=sharing" class="btn-portfolio" target="_blank">Ver portfólio</a>
+      </div>
+    </div>
+
+    <!-- Jaqueline Matsumoto -->
+    <div class="team-card">
+      <div class="team-avatar">JM</div>
+      <div class="team-info">
+        <div class="team-name">Jaqueline Matsumoto</div>
+        <div class="team-role">Tradutora Científica</div>
+        <div class="team-langs">Inglês · Japonês<br/>Esp.: Medicina & Ciências</div>
+        <a href="LINK_DO_PORTFOLIO_AQUI" class="btn-portfolio" target="_blank">Ver portfólio</a>
+      </div>
+    </div>
+
+    <!-- Leticia Storel -->
+    <div class="team-card">
+      <div class="team-avatar">LS</div>
+      <div class="team-info">
+        <div class="team-name">Leticia Storel</div>
+        <div class="team-role">Legendagem & Audiovisual</div>
+        <div class="team-langs">Inglês · Espanhol<br/>Esp.: Audiovisual & Mídia</div>
+        <a href="LINK_DO_PORTFOLIO_AQUI" class="btn-portfolio" target="_blank">Ver portfólio</a>
+      </div>
+    </div>
+
+    <!-- Malu Gregório -->
+    <div class="team-card">
+      <div class="team-avatar">MG</div>
+      <div class="team-info">
+        <div class="team-name">Malu Gregório</div>
+        <div class="team-role">Revisora</div>
+        <div class="team-langs">Inglês · Russo<br/>Esp.: Literária & Técnica</div>
+        <a href="https://drive.google.com/file/d/1V4FJKmmtGEEATuM_HojwMrzfRsMxrY5a/view?usp=sharing" class="btn-portfolio" target="_blank">Ver portfólio</a>
+      </div>
+    </div>
+
+    <!-- Natasha Mattos -->
+    <div class="team-card">
+      <div class="team-avatar">NM</div>
+      <div class="team-info">
+        <div class="team-name">Natasha Mattos</div>
+        <div class="team-role">Tradutora de Jogos</div>
+        <div class="team-langs">Inglês · Português (BR)<br/>Esp.: Jogos & Entretenimento</div>
+        <a href="LINK_DO_PORTFOLIO_AQUI" class="btn-portfolio" target="_blank">Ver portfólio</a>
+      </div>
+    </div>
+
+    <!-- Sophia Trindade -->
+    <div class="team-card">
+      <div class="team-avatar">ST</div>
+      <div class="team-info">
+        <div class="team-name">Sophia Trindade</div>
+        <div class="team-role">Tradutora Literária</div>
+        <div class="team-langs">Inglês · Espanhol<br/>Esp.: Literária</div>
+        <a href="portfolio-sophia.html" class="btn-portfolio" target="_blank">Ver portfólio</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -959,135 +933,16 @@
 </section>
 
 
-<!-- SIMULADOR DE ORÇAMENTO -->
-<section id="simulador">
-  <div class="section-label">Estimativa de Valores</div>
-  <h2 class="section-title">Simule seu<br/><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#7A6000;">Orçamento</em></h2>
-  <div class="simulador-layout fade-in">
+<!-- ORÇAMENTO -->
+<section id="simulador" style="min-height:auto;">
+  <div class="section-label">Orçamento</div>
+  <h2 class="section-title">Solicite seu<br/><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#7A6000;">Orçamento</em></h2>
 
-    <!-- CONTROLES -->
-    <div class="sim-controls">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start;" class="fade-in orcamento-duplo">
 
-      <div class="sim-group">
-        <label>Tipo de Serviço</label>
-        <select id="sim-servico" onchange="calcular()">
-          <option value="tecnica">Tradução Técnica</option>
-          <option value="literaria">Tradução Literária</option>
-          <option value="revisao">Revisão de Texto</option>
-          <option value="versao">Versão e Legendagem</option>
-        </select>
-      </div>
-
-      <div class="sim-group">
-        <label>Combinação de Idiomas</label>
-        <select id="sim-idioma" onchange="calcular()">
-          <option value="0,80">Português ↔ Inglês</option>
-          <option value="0,50">Inglês ↔ Português</option>
-          <option value="0,80">Português ↔ Espanhol</option>
-          <option value="0,50">Espanhol ↔ Português</option>
-          <option value="0,80">Português ↔ Francês</option>
-          <option value="0,50">Francês ↔ Português</option>
-          <option value="0,80">Português ↔ Italiano</option>
-          <option value="0,50">Italiano ↔ Português</option>
-          <option value="0,80">Português ↔ Alemão</option>
-          <option value="0,50">Alemão ↔ Português</option>
-          <option value="0,80">Português ↔ Russo</option>
-          <option value="0,50">Russo ↔ Português</option>
-          <option value="0,80">Português ↔ Japonês</option>
-          <option value="0,50">Japonês ↔ Português</option>
-        </select>
-      </div>
-
-      <div class="sim-group">
-        <label>Número de Páginas — <span class="sim-range-val" id="sim-pag-val">10</span> pág.</label>
-        <input type="range" id="sim-paginas" min="1" max="1000" value="10" oninput="calcular()"/>
-        <div class="sim-range-row"><span>1 pág.</span><span>1000 pág.</span></div>
-      </div>
-
-      <div class="sim-group">
-        <label>Urgência do Prazo</label>
-        <select id="sim-urgencia" onchange="calcular()">
-          <option value="1">Normal (7+ dias úteis)</option>
-          <option value="1.2">Rápido (3–6 dias úteis)</option>
-          <option value="1.5">Urgente (1–2 dias úteis)</option>
-        </select>
-      </div>
-
-      <div class="sim-group">
-        <label>Nível de Especialização</label>
-        <select id="sim-nivel" onchange="calcular()">
-          <option value="1">Geral</option>
-          <option value="1.15">Especializado (jurídico, médico, técnico)</option>
-          <option value="1.3">Alta especialização (científico, literário)</option>
-        </select>
-      </div>
-
-    </div>
-
-    <!-- RESULTADO -->
-    <div class="sim-result">
-      <div class="sim-result-label">Estimativa calculada</div>
-      <h3>Valor estimado do projeto</h3>
-      <div class="sim-price" id="sim-total">R$ 850</div>
-      <div class="sim-price-note">* estimativa aproximada · sujeita a análise</div>
-
-      <div class="sim-breakdown">
-        <div class="sim-row">
-          <span class="sim-row-label">Serviço base</span>
-          <span class="sim-row-val" id="sim-base">—</span>
-        </div>
-        <div class="sim-row">
-          <span class="sim-row-label">Páginas × tarifa</span>
-          <span class="sim-row-val" id="sim-paginas-val">—</span>
-        </div>
-        <div class="sim-row">
-          <span class="sim-row-label">Fator de idioma</span>
-          <span class="sim-row-val" id="sim-idioma-val">—</span>
-        </div>
-        <div class="sim-row">
-          <span class="sim-row-label">Urgência</span>
-          <span class="sim-row-val" id="sim-urgencia-val">—</span>
-        </div>
-        <div class="sim-row">
-          <span class="sim-row-label">Especialização</span>
-          <span class="sim-row-val" id="sim-nivel-val">—</span>
-        </div>
-        <div class="sim-row" style="border-top:1px solid var(--border);padding-top:0.8rem;margin-top:0.4rem;">
-          <span class="sim-row-label" style="color:var(--black);font-weight:600">Prazo estimado</span>
-          <span class="sim-row-val" id="sim-prazo">—</span>
-        </div>
-      </div>
-
-      <div class="sim-disclaimer">
-        Esta simulação é apenas uma estimativa indicativa. O valor final depende da análise do texto, complexidade e disponibilidade da equipe. Solicite um orçamento formal abaixo.
-      </div>
-
-      <a href="#contato" class="sim-cta">Solicitar orçamento formal →</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTATO -->
-<section id="contato">
-  <div class="contato-layout fade-in">
-    <div class="contato-info">
-      <div class="section-label">Fale Conosco</div>
-      <h2 class="section-title">Contato</h2>
-      <h3>Endereço</h3>
-      <p>Av. Higienópolis, 449<br/>Higienópolis, São Paulo - SP<br/>CEP 01238-001, Brasil</p>
-      <div class="contato-divider"></div>
-      <h3>Telefone & WhatsApp</h3>
-      <p>+55 (11) 3456-7890<br/>+55 (11) 99876-5432</p>
-      <div class="contato-divider"></div>
-      <h3>E-mail</h3>
-      <p>contato@solaristrad.com.br<br/>orcamento@solaristrad.com.br</p>
-      <div class="contato-divider"></div>
-      <h3>Horário de Atendimento</h3>
-      <p>Segunda a Sexta: 9h às 18h<br/>Sábado: 9h às 13h</p>
-    </div>
+    <!-- FORMULÁRIO -->
     <div class="orcamento-form">
-      <h3>Solicite um<br/><em style="font-style:italic;">Orçamento</em></h3>
+      <h3>Solicite um<br/><em style="font-style:italic;">Orçamento Formal</em></h3>
       <div class="form-row">
         <div class="form-group">
           <label>Nome</label>
@@ -1120,12 +975,85 @@
       </div>
       <div class="form-group">
         <label>Mensagem</label>
-        <textarea id="f-mensagem" placeholder="Descreva seu projeto..."></textarea>
+        <textarea id="f-mensagem" placeholder="Descreva seu projeto, número de caracteres, prazo..."></textarea>
       </div>
       <button id="btn-enviar" class="btn-orcamento" style="width:100%;padding:1rem;font-size:0.75rem">
         Enviar Solicitação
       </button>
     </div>
+
+    <!-- FAQ -->
+    <div class="faq-col">
+      <div class="faq-header">
+        <div class="section-label" style="margin-bottom:0.8rem;">Dúvidas</div>
+        <h3 class="faq-title">Perguntas<br/><em>frequentes</em></h3>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>O que é uma lauda?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Uma lauda é a unidade de medida padrão do mercado editorial e de tradução. Na Solaris, adotamos a lauda de <strong>2.100 caracteres</strong> (com espaços), que é o padrão mais utilizado no Brasil. O valor por lauda é de R$ 43,02.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Quanto tempo leva uma tradução?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>O prazo varia conforme o volume e a complexidade do texto. Em média, um tradutor produz entre 5 e 8 laudas por dia. Após a análise do texto, enviamos um prazo preciso junto com o orçamento formal. Também trabalhamos com prazos urgentes mediante consulta.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Qual a diferença entre tradução técnica e literária?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>A <strong>tradução técnica</strong> abrange documentos jurídicos, científicos, médicos e corporativos. Textos que exigem precisão terminológica e domínio de área. Já a <strong>tradução literária</strong> é destinada a obras de ficção e poesia, onde a fidelidade estética e o ritmo do texto são tão importantes quanto o conteúdo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Os meus documentos ficam em sigilo?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sim. Todos os projetos são tratados com absoluta confidencialidade. Assinamos acordos de sigilo (NDA) sempre que o cliente solicitar, e nenhum material é compartilhado com terceiros sem autorização expressa.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Como envio o meu texto para orçamento?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Basta preencher o formulário ao lado descrevendo seu projeto. Se preferir, envie o arquivo diretamente para <strong>orcamento@solaristrad.com.br</strong>. Aceitamos Word, PDF, TXT e outros formatos comuns. Retornamos com o orçamento em até <strong>24 horas úteis</strong>.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Vocês fazem revisão de traduções feitas por terceiros?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Sim. Nosso serviço de revisão atende tanto textos traduzidos internamente quanto traduções realizadas por outras agências ou ferramentas automáticas. Avaliamos a fidelidade ao original, a consistência terminológica e a qualidade do texto de chegada.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1140,47 +1068,56 @@
     border:1px solid var(--border); padding:3rem 2.5rem;
     position:relative; animation: fadeUp 0.4s ease both;
   ">
-    <!-- Star deco -->
     <div style="text-align:center; margin-bottom:1.5rem;">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
         <circle cx="24" cy="24" r="22" fill="#F5E642"/>
         <path d="M24 10 L26.5 19 L36 19 L28.5 24.5 L31 33.5 L24 28.5 L17 33.5 L19.5 24.5 L12 19 L21.5 19 Z" fill="#111010"/>
       </svg>
     </div>
-    <div style="
-      font-size:0.58rem; letter-spacing:0.45em; text-transform:uppercase;
-      color:var(--gray-text); text-align:center; margin-bottom:0.6rem;
-    ">Solaris Traduções</div>
-    <h3 style="
-      font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300;
-      text-align:center; margin-bottom:0.4rem; color:var(--black);
-    ">Solicitação Recebida</h3>
+    <div style="font-size:0.58rem;letter-spacing:0.45em;text-transform:uppercase;color:var(--gray-text);text-align:center;margin-bottom:0.6rem;">Solaris Traduções</div>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;text-align:center;margin-bottom:0.4rem;color:var(--black);">Solicitação Recebida</h3>
     <div style="width:36px;height:2px;background:var(--yellow);margin:0 auto 2rem;"></div>
-
-    <div id="comprovante-corpo" style="font-size:0.78rem; line-height:1.9; color:var(--gray-text);"></div>
-
-    <div style="
-      margin-top:1.8rem; padding-top:1.2rem;
-      border-top:1px solid var(--border);
-      font-size:0.62rem; letter-spacing:0.1em; color:var(--gray-text); text-align:center;
-    ">
+    <div id="comprovante-corpo" style="font-size:0.78rem;line-height:1.9;color:var(--gray-text);"></div>
+    <div style="margin-top:1.8rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:0.62rem;letter-spacing:0.1em;color:var(--gray-text);text-align:center;">
       Um comprovante foi enviado para o seu e-mail.<br/>
       Retornaremos em até <strong style="color:var(--black)">2 dias úteis</strong>.
     </div>
     <button onclick="fecharModal()" style="
-      margin-top:1.8rem; width:100%; padding:0.75rem;
-      background:var(--black); color:var(--yellow);
-      border:none; font-family:'Josefin Sans',sans-serif;
-      font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase;
-      font-weight:600; cursor:none; transition:background 0.2s;
-    " onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--black)'">
+      margin-top:1.8rem;width:100%;padding:0.75rem;
+      background:var(--yellow);color:var(--black);
+      border:1.5px solid var(--yellow);font-family:'Josefin Sans',sans-serif;
+      font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;
+      font-weight:600;cursor:none;transition:background 0.2s,border-color 0.2s;
+    " onmouseover="this.style.background='var(--white)';this.style.borderColor='var(--black)'" onmouseout="this.style.background='var(--yellow)';this.style.borderColor='var(--yellow)'">
       Fechar
     </button>
   </div>
 </div>
 
+<!-- CONTATO -->
+<section id="contato" style="min-height:auto;">
+  <div class="section-label">Fale Conosco</div>
+  <h2 class="section-title">Contato</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:3rem;margin-top:3rem;" class="fade-in">
+    <div class="contato-info">
+      <h3>Endereço</h3>
+      <p>Av. Higienópolis, 449<br/>Higienópolis, São Paulo — SP<br/>CEP 01238-001, Brasil</p>
+    </div>
+    <div class="contato-info">
+      <h3>Telefone & WhatsApp</h3>
+      <p>+55 (11) 3456-7890<br/>+55 (11) 99876-5432</p>
+    </div>
+    <div class="contato-info">
+      <h3>E-mail</h3>
+      <p>contato@solaristrad.com.br<br/>orcamento@solaristrad.com.br</p>
+    </div>
+    <div class="contato-info">
+      <h3>Horário de Atendimento</h3>
+      <p>Segunda a Sexta: 9h às 18h<br/>Sábado: 9h às 13h</p>
+    </div>
+  </div>
+</section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Solaris Traduções</div>
   <div class="footer-copy">© 2025 Solaris Traduções — Todos os direitos reservados</div>
@@ -1243,44 +1180,15 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
-  // ── Simulador de orçamento ────────────────────────────────────
-  const tarifaBase = { tecnica: 85, literaria: 110, revisao: 55, versao: 130 };
-  const nomeServico = { tecnica:'Tradução Técnica', literaria:'Tradução Literária', revisao:'Revisão de Texto', versao:'Versão e Legendagem' };
-  const urgenciaLabel = { '1':'Normal', '1.2':'Rápido (+20%)', '1.5':'Urgente (+50%)' };
-  const nivelLabel = { '1':'Geral', '1.15':'Especializado (+15%)', '1.3':'Alta especialização (+30%)' };
-  const prazoBase = { tecnica:1.5, literaria:2, revisao:0.8, versao:2.5 }; // dias/pag
-
-  function fmt(v) { return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
-  function pct(v) { return v === 1 ? '×1.0' : '×' + v.toFixed(2); }
-
-  function calcular() {
-    const servico  = document.getElementById('sim-servico').value;
-    const idioma   = parseFloat(document.getElementById('sim-idioma').value);
-    const paginas  = parseInt(document.getElementById('sim-paginas').value);
-    const urgencia = parseFloat(document.getElementById('sim-urgencia').value);
-    const nivel    = parseFloat(document.getElementById('sim-nivel').value);
-
-    document.getElementById('sim-pag-val').textContent = paginas;
-
-    const base    = tarifaBase[servico];
-    const subtotal = base * paginas;
-    const total    = subtotal * idioma * urgencia * nivel;
-
-    // prazo
-    const diasBrutos = Math.ceil(paginas * prazoBase[servico] / urgencia);
-    const prazoTexto = diasBrutos <= 1 ? '1 dia útil'
-                     : diasBrutos + ' dias úteis';
-
-    document.getElementById('sim-total').textContent = fmt(total);
-    document.getElementById('sim-base').textContent  = nomeServico[servico] + ' · ' + fmt(base) + '/pág.';
-    document.getElementById('sim-paginas-val').textContent = paginas + ' pág. × ' + fmt(base) + ' = ' + fmt(subtotal);
-    document.getElementById('sim-idioma-val').textContent  = pct(idioma);
-    document.getElementById('sim-urgencia-val').textContent = urgenciaLabel[String(urgencia)];
-    document.getElementById('sim-nivel-val').textContent   = nivelLabel[String(nivel)];
-    document.getElementById('sim-prazo').textContent       = prazoTexto;
+  // ── FAQ ───────────────────────────────────────────────────────
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // fecha todos
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    // abre o clicado se estava fechado
+    if (!isOpen) item.classList.add('open');
   }
-  calcular(); // inicializa
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
   // ── Formulário de orçamento ───────────────────────────────────
   document.getElementById('btn-enviar').addEventListener('click', async () => {
